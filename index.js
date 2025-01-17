@@ -22,10 +22,8 @@ const colors = [];
 const noise = new ImprovedNoise();
 let p = new THREE.Vector3();
 let v3 = new THREE.Vector3();
-const noisefreq = 0.1;
-const noiseAmp = 0.5;
-const color = new THREE.Color();
-const hueNoiseFreq = 0.005;
+const noisefreq = 0.4;
+const noiseAmp = 0.1;
 for (let i = 0; i < tubeVerts.count; i += 1) {
   p.fromBufferAttribute(tubeVerts, i);
   v3.copy(p);
@@ -36,10 +34,7 @@ for (let i = 0; i < tubeVerts.count; i += 1) {
   );
   v3.addScaledVector(p, vertexNoise * noiseAmp);
   tubeVerts.setXYZ(i, v3.x, p.y, v3.z);
-  
-  let colorNoise = noise.noise(v3.x * hueNoiseFreq, v3.y * hueNoiseFreq, i * 0.001 * hueNoiseFreq);
-  color.setHSL(0.5 - colorNoise, 1, 0.5);
-  colors.push(color.r, color.g, color.b);
+  colors.push(1.0, 1.0, 1.0);
 }
 const mat = new THREE.PointsMaterial({ size: 0.03, vertexColors: true });
 
